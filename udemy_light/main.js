@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import Stats from 'three/examples/jsm/libs/stats.module'
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.shadowMap.enabled = true;
@@ -41,10 +42,14 @@ box.castShadow = true;
 box.receiveShadow = true;
 scene.add(box);
 
+const stats = new Stats();
+document.body.appendChild(stats.dom);
+
 const controls = new OrbitControls(camera, renderer.domElement);
 
 function animate() {
   requestAnimationFrame(animate);
+  stats.update();
   renderer.render(scene, camera);
 }
 
